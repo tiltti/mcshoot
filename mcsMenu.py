@@ -7,12 +7,11 @@ from menu import Menu
 from subprocess import *
 from time import sleep, strftime
 
+# Utility function for runnin shell commands
 def run_cmd(cmd):
         p = Popen(cmd, shell=True, stdout=PIPE)
         output = p.communicate()[0]
 	return output
-
-
 
 # Check the IP address 
 #        lcd.message(datetime.now().strftime('%b %d  %H:%M:%S\n'))
@@ -38,7 +37,9 @@ sub23 = menu.subElement("2 > CPU-Temp    ", "BASH", "vcgencmd measure_temp | cut
 sub24 = menu.subElement("2 > Memory      ", "PYTHON", 'str(str(psutil.phymem_usage()[3])+"% used")')
 sub21 = menu.subElement("2 > Datetime ", "PYTHON", "datetime.now().strftime('%b %d  %H:%M:%S')")
 
-#Adding elements to the menu
+# Add elements to the menu
+# TODO: Iterator
+
 menu.addTopElement(top1)
 menu.addTopElement(top2)
 menu.addTopElement(top3)
@@ -54,14 +55,11 @@ menu.addSubElement(top2, sub22)
 menu.addSubElement(top2, sub23)
 menu.addSubElement(top2, sub24)
 
-#color = lcd.TEAL
-
-#initializing display
+# Initialize the LCD display
 lcd.clear()
 lcd.begin(16,1)
-#lcd.backlight(color)
 
-#little loading animation
+# Unnecessary but professional looking loading display :)
 i = 0
 lcd.message("Initializing...\n")
 while(i < 16):
@@ -69,6 +67,6 @@ while(i < 16):
     sleep(.1)
     i += 1
 
-#starting the menu
+# Start the menu
 menu.startMenu(lcd)
 
