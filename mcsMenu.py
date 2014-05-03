@@ -5,6 +5,26 @@ from time import sleep
 from Adafruit_CharLCDPlate import Adafruit_CharLCDPlate
 from menu import Menu
 
+from subprocess import *
+from time import sleep, strftime
+from datetime import datetime
+
+cmd = "ip addr show wlan0 | grep inet | awk '{print $2}' | cut -d/ -f1"
+
+
+#def run_cmd(cmd):
+#        p = Popen(cmd, shell=True, stdout=PIPE)
+#        output = p.communicate()[0]
+#        return output
+#
+#while 1:
+#        lcd.clear()
+#        ipaddr = run_cmd(cmd)
+#        lcd.message(datetime.now().strftime('%b %d  %H:%M:%S\n'))
+#        lcd.message('IP %s' % ( ipaddr ) )
+#        sleep(2)
+
+
 lcd = Adafruit_CharLCDPlate()
 menu = Menu()
 
@@ -37,11 +57,12 @@ menu.addSubElement(top2, sub21)
 menu.addSubElement(top2, sub22)
 menu.addSubElement(top2, sub23)
 
-color = lcd.TEAL
+#color = lcd.TEAL
 
 #initializing display
 lcd.clear()
-lcd.backlight(color)
+lcd.begin(16,1)
+#lcd.backlight(color)
 
 #little loading animation
 i = 0
@@ -52,5 +73,5 @@ while(i < 16):
     i += 1
 
 #starting the menu
-menu.startMenu(lcd, color)
+menu.startMenu(lcd)
 
