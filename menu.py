@@ -4,6 +4,7 @@ import Adafruit_CharLCDPlate
 from time import sleep
 import commands
 import psutil
+from datetime import datetime
 
 class Menu():
     menu = list()
