@@ -1,4 +1,4 @@
-#Daniel Juenger, github.com/sleeepyjack
+# Original menu.py basde on: Daniel Juenger (github.com/sleeepyjack)
 
 import Adafruit_CharLCDPlate
 from time import sleep
