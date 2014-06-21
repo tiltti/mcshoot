@@ -1,7 +1,6 @@
 # Using Menu.py made by Daniel Juenger (github.com/sleeepyjack)
 # Using Adafruit_CharLCDPlate library by Adafruit Industries (github.com/adafruit)
 
-from time import sleep
 from Adafruit_CharLCDPlate import Adafruit_CharLCDPlate
 from menu import Menu
 from subprocess import *
@@ -26,8 +25,8 @@ menu = Menu()
 top1 = menu.topElement("< 1. Network   >", "STRING", "        v")
 top2 = menu.topElement("< 2. System    >", "STRING", "        v")
 top3 = menu.topElement("< 3. McShoot   >", "STRING", "        v")
-top4 = menu.topElement("< 4. NotUsed   >", "STRING", "        v")
-top5 = menu.topElement("< 5. NotUsed   >", "STRING", "        v")
+top4 = menu.topElement("< 4. NotUsed   >", "STRING", "         ")
+top5 = menu.topElement("< 5. NotUsed   >", "STRING", "         ")
 sub13 = menu.subElement("1 > Signal      ", "BASH", "iwconfig wlan0 | awk -F'[ =]+' '/Signal level/ {print $7}' | cut -d/ -f1")
 sub12 = menu.subElement("1 > SSID        ", "BASH", "iwconfig wlan0 | grep 'ESSID:' | awk '{print $4}' | sed 's/ESSID://g'")
 sub14 = menu.subElement("1 > Internet    ", "BASH", "ping -q -w 1 -c 1 `ip r | grep default | cut -d ' ' -f 3` > /dev/null && echo ok || echo error")

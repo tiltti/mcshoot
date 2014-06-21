@@ -1,9 +1,17 @@
+#!/usr/bin/python
+
 import time
 from threading import Timer
 
+debug = True
+
 # TODO: Change accordingly
+# Times are in seconds
 startDelay = 2
-shootDelay = 3
+loadDelay = 3
+attDelay = 7
+varDelay = 4
+stopDelay = 5
 
 # Led definitions and display names
 
@@ -15,9 +23,13 @@ yellow = 'Yellow'
 abortText = 'Abort'
 
 def initTimer():
-	print 'Timer initialized with values:'
-	print 'Start delay: %s' % startDelay
-	print 'Shoot delay: %s' % shootDelay
+	if debug:
+		print 'Timer initialized with values:'
+		print 'Start delay: %s sec' % startDelay
+		print 'Load delay: %s sec' % loadDelay
+		print 'Attention delay: %s sec' % attDelay
+		print 'Variable delay: %s sec' % varDelay
+		print 'Stop delay: %s sec' % stopDelay
 	t = Timer(startDelay, hello)
 
 def startClock():
