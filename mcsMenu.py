@@ -1,6 +1,8 @@
 # Using Menu.py made by Daniel Juenger (github.com/sleeepyjack)
 # Using Adafruit_CharLCDPlate library by Adafruit Industries (github.com/adafruit)
 
+# dependencies: Colorama
+
 from Adafruit_CharLCDPlate import Adafruit_CharLCDPlate
 from menu import Menu
 from subprocess import *

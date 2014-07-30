@@ -2,6 +2,11 @@
 
 import time
 from threading import Timer
+from colorama import init
+from colorama import Fore, Back, Style
+
+# init colorama
+init(autoreset=True)
 
 debug = True
 
@@ -24,12 +29,13 @@ abortText = 'Abort'
 
 def initTimer():
 	if debug:
-		print 'Timer initialized with values:'
-		print 'Start delay: %s sec' % startDelay
-		print 'Load delay: %s sec' % loadDelay
-		print 'Attention delay: %s sec' % attDelay
-		print 'Variable delay: %s sec' % varDelay
-		print 'Stop delay: %s sec' % stopDelay
+		print 'Timer initialized with values (secs):'
+		print 'Start delay: ' + Fore.RED + '%s' % startDelay
+		print 'Load delay: ' + Fore.RED + '%s' % loadDelay
+		print 'Attention delay: ' + Fore.RED + '%s' % attDelay
+		print 'Variable delay: ' + Fore.RED + '%s' % varDelay
+		print 'Stop delay: ' + Fore.RED + '%s' % stopDelay
+		print(Fore.RESET + Back.RESET + Style.RESET_ALL)
 	t = Timer(startDelay, hello)
 
 def startClock():
