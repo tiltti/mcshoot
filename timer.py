@@ -2,6 +2,7 @@
 
 import sys
 import time
+import getopt
 from time import sleep
 from threading import Timer
 from colorama import init
@@ -14,11 +15,11 @@ debug = True
 
 # TODO: Change accordingly
 # Times are in seconds
-startDelay = 2
-loadDelay = 3
-attDelay = 7
-varDelay = 4
-stopDelay = 5
+startDelay = 1
+loadDelay = 1
+attDelay = 1
+varDelay = 1
+stopDelay = 1
 
 # Led definitions and display names
 
@@ -53,11 +54,11 @@ def initTimer():
 	t = Timer(startDelay, hello)
 
 def startClock():
-	runSequence('Start', startDelay, red)
-	runSequence('Load', loadDelay, red)
-	runSequence('Attention', attDelay, yellow)
+	runSequence('Start', startDelay, yellow)
+	runSequence('Load', loadDelay, green)
+	runSequence('Attention', attDelay, red)
 	runSequence('Shoot', varDelay, green)
-	runSequence('Stop', stopDelay, red)
+	runSequence('Stop and Unload', stopDelay, red)
 
 
 def runSequence(delayName, delayTime, ledColor):
@@ -73,15 +74,54 @@ def changeLedStatus(status):
 	ledStatus = status
 	print 'Led status: %s' % ledStatus
 
-def hello():
-	print 'hello world'
+def checkArguments():
+	print 'Number of arguments:', len(sys.argv), 'arguments.'
+	print 'Argument List:', str(sys.argv)
 
-def main():
+def finnish():
+	print '\nFinnish.'
+	print 'Nice shootin, Tex!'
+	sys.exit()
+
+def hello():
+	print 'foo'
+
+def usage():
+	print 'timer.py -l [ true | false ] -c [ true | false ] '
+
+def main(argv):
+  	lcd = 'false'
+ 	color = 'false'
+  	
+	try:
+	      	opts, args = getopt.getopt(argv,"hl:c:",["lcd=","color="])
+	except getopt.GetoptError:
+      		usage()
+		sys.exit(2)
+   	for opt, arg in opts:
+      		if opt == '-h':
+         		usage()
+         		sys.exit()
+      		elif opt in ("-l", "--lcd"):
+			if arg == 'true' or arg == 'True': 
+				lcd = True
+         		else:
+				lcd = False
+      		elif opt in ("-c", "--color"):
+         		if arg == 'true' or arg == 'True':
+				color = True
+			else:
+				color = False
+   	print 'LCD: %r' % lcd
+   	print 'Color: %r' % color
+
+	checkArguments()
 	resetColors()
 	showLogo()
 	initTimer()
 	startClock()
+	finnish()
 
 if __name__ == "__main__":
-	main()
+	main(sys.argv[1:])
 
