@@ -11,8 +11,6 @@ from colorama import Fore, Back, Style
 # init colorama
 init(autoreset=True)
 
-debug = True
-
 # TODO: Change accordingly
 # Times are in seconds
 startDelay = 1
@@ -42,7 +40,7 @@ def showLogo():
         print Fore.GREEN + '|  |  | |       |______ |_____| |     | |     |    |   '
         print Fore.GREEN + '|  |  | |_____  ______| |     | |_____| |_____|    |   '
 
-def initTimer():
+def initTimer():			
 	if debug:
 		print 'Timer initialized with values (secs):'
 		print 'Start delay: ' + Fore.RED + '%s' % startDelay
@@ -87,17 +85,21 @@ def hello():
 	print 'foo'
 
 def usage():
-	print 'timer.py -l [ true | false ] -c [ true | false ] '
+	print 'timer.py -l --lcd [ true | false ] -c --color [ true | false ] -d --debug [ true | false ]'
+
 
 def main(argv):
-  	lcd = 'false'
- 	color = 'false'
-  	
-	try:
-	      	opts, args = getopt.getopt(argv,"hl:c:",["lcd=","color="])
+
+	lcd = False
+	color = False
+	debug = False
+
+  	try:
+		opts, args = getopt.getopt(argv,"hl:c:d:",["lcd=","color=","debug="])
 	except getopt.GetoptError:
-      		usage()
+    		usage()
 		sys.exit(2)
+   	
    	for opt, arg in opts:
       		if opt == '-h':
          		usage()
@@ -105,16 +107,40 @@ def main(argv):
       		elif opt in ("-l", "--lcd"):
 			if arg == 'true' or arg == 'True': 
 				lcd = True
-         		else:
+				global lcd
+			elif arg == 'false' or arg == 'False':
 				lcd = False
+				global lcd
+         		else:
+				usage()
+				sys.exit(2)
       		elif opt in ("-c", "--color"):
          		if arg == 'true' or arg == 'True':
 				color = True
-			else:
+				global color
+			elif arg == 'false' or arg == 'False':
 				color = False
-   	print 'LCD: %r' % lcd
-   	print 'Color: %r' % color
+				global color
+			else:
+				usage()
+				sys.exit(2)
+            	elif opt in ("-d", "--debug"):
+                	if arg == 'true' or arg == 'True':
+                		debug = True
+				global debug
+                	elif arg == 'false' or arg == 'False':
+                    		debug = False
+				global debug
+                	else:
+                    		usage()
+                    		sys.exit(2)
 
+	if (debug):
+		print 'Debug: %r' % debug
+ 		print 'LCD: %r' % lcd
+   		print 'Color: %r' % color
+
+	# main program
 	checkArguments()
 	resetColors()
 	showLogo()
