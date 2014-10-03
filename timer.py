@@ -28,6 +28,11 @@ yellow = 'Yellow'
 
 abortText = 'Abort'
 
+output = 'screen'
+lcdSize = ('16','2')
+color = False
+debug = False
+
 def resetColors():
 	Fore.RESET
 	Back.RESET
@@ -87,15 +92,16 @@ def hello():
 def usage():
 	print 'timer.py -l --lcd [ true | false ] -c --color [ true | false ] -d --debug [ true | false ]'
 
-
 def main(argv):
-
-	lcd = False
-	color = False
-	debug = False
+	
+	global lcd
+	global color
+	global debug
+	global lcdSize
+	global output
 
   	try:
-		opts, args = getopt.getopt(argv,"hl:c:d:",["lcd=","color=","debug="])
+		opts, args = getopt.getopt(argv,"ho:c:d:",["output=","color=","debug="])
 	except getopt.GetoptError:
     		usage()
 		sys.exit(2)
@@ -104,41 +110,36 @@ def main(argv):
       		if opt == '-h':
          		usage()
          		sys.exit()
-      		elif opt in ("-l", "--lcd"):
-			if arg == 'true' or arg == 'True': 
-				lcd = True
-				global lcd
-			elif arg == 'false' or arg == 'False':
-				lcd = False
-				global lcd
+      		elif opt in ("-o", "--output"):
+			if arg.lower() == 'lcd': 
+				output = 'lcd'
+			elif arg.lower() == 'screen':
+				output = 'screen'
          		else:
 				usage()
 				sys.exit(2)
       		elif opt in ("-c", "--color"):
          		if arg == 'true' or arg == 'True':
 				color = True
-				global color
 			elif arg == 'false' or arg == 'False':
 				color = False
-				global color
 			else:
 				usage()
 				sys.exit(2)
             	elif opt in ("-d", "--debug"):
                 	if arg == 'true' or arg == 'True':
                 		debug = True
-				global debug
                 	elif arg == 'false' or arg == 'False':
                     		debug = False
-				global debug
                 	else:
                     		usage()
                     		sys.exit(2)
 
 	if (debug):
 		print 'Debug: %r' % debug
- 		print 'LCD: %r' % lcd
+ 		print 'Output: %s' % output
    		print 'Color: %r' % color
+		print 'lcdSize: {0}'.format(lcdSize)
 
 	# main program
 	checkArguments()
