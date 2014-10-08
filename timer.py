@@ -8,6 +8,12 @@ from threading import Timer
 from colorama import init
 from colorama import Fore, Back, Style
 
+debug = False
+
+# TODO: Set via cmd args or property file
+# LCD size in characters
+lcdSize = ('16','2')
+
 # init colorama
 init(autoreset=True)
 
@@ -27,11 +33,9 @@ red = 'Red'
 yellow = 'Yellow'
 
 abortText = 'Abort'
-
 output = 'screen'
-lcdSize = ('16','2')
+
 color = False
-debug = False
 
 def resetColors():
 	Fore.RESET
@@ -89,8 +93,17 @@ def finnish():
 def hello():
 	print 'foo'
 
+def lcdPrint(text):
+	for line in text:
+		if len(text) > 16:
+			print Fore.YELLOW + Back.RED + 'Too long string for LCD!'
+	print Fore.YELLOW + Back.BLUE + '+................+'
+	print Fore.YELLOW + Back.BLUE + '|' + text + '|'
+        print Fore.YELLOW + Back.BLUE + '|' + text + '|'
+        print Fore.YELLOW + Back.BLUE + '+................+'
+
 def usage():
-	print 'timer.py -l --lcd [ true | false ] -c --color [ true | false ] -d --debug [ true | false ]'
+	print 'timer.py -o --output [ lcd | screen ] -c --color [ true | false ] -d --debug [ true | false ]'
 
 def main(argv):
 	
@@ -135,17 +148,17 @@ def main(argv):
                     		usage()
                     		sys.exit(2)
 
-	if (debug):
-		print 'Debug: %r' % debug
- 		print 'Output: %s' % output
-   		print 'Color: %r' % color
-		print 'lcdSize: {0}'.format(lcdSize)
-
 	# main program
-	checkArguments()
+	if (debug):
+		checkArguments()
+                print 'Debug: %r' % debug
+                print 'Output: %s' % output
+                print 'Color: %r' % color
+                print 'lcdSize: {0}'.format(lcdSize)
 	resetColors()
 	showLogo()
 	initTimer()
+	lcdPrint(('foobar','baz'))
 	startClock()
 	finnish()
 
