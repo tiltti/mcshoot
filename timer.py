@@ -42,7 +42,6 @@ class ShootUtils:
 		print("foobar")
 		return "foobar"
 
-
 def resetColors():
 	Fore.RESET
 	Back.RESET

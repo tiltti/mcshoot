@@ -167,6 +167,7 @@ class Menu():
 	global isOn
 	global isOnCount
 	lcd.clear()
+	#  if the backlight is only single color, this has to be disabled // Ossi
 	#lcd.backlight(color)
 	selfisOnCount = 0
 	self.firstTopElement()
@@ -196,7 +197,7 @@ class Menu():
 			if lcd.buttonPressed(lcd.SELECT):
                 		self.returnToTopElement()
                			self.isOnCount = 0
-				print "s"
+				print "Self destruct initiated!"
                 		sleep(.3)
         		if self.isOnCount > 100:
                 		lcd.backlight(lcd.OFF)
