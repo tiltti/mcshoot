@@ -65,17 +65,17 @@ def startClock():
 	runSequence('Load', loadDelay, green)
 	runSequence('Attention', attDelay, red)
 	runSequence('Shoot', varDelay, green)
-	runSequence('Stop and Unload', stopDelay, red)
-
+	runSequence('Stop/Unload', stopDelay, red)
 
 def runSequence(delayName, delayTime, ledColor):
-	print '\nSequence: ' + delayName + ', Led color: ' + ledColor
+        lcdPrint(['Seq: ' + delayName, 'Led: ' + ledColor])
+	print 'Sequence: ' + delayName + ', Led color: ' + ledColor
 	s = 0
 	while s < delayTime :
 		s = s +1
 		sys.stdout.write('.')
 		sleep(1)
-
+	sys.stdout.write('\n')
 
 def changeLedStatus(status):
 	ledStatus = status
@@ -86,8 +86,7 @@ def checkArguments():
 	print 'Argument List:', str(sys.argv)
 
 def finnish():
-	print '\nFinnish.'
-	print 'Nice shootin, Tex!'
+	lcdPrint(['Round complete!','Exiting...'])
 	sys.exit()
 
 def hello():
@@ -107,7 +106,6 @@ def usage():
 	print 'timer.py -o --output [ lcd | screen ] -c --color [ true | false ] -d --debug [ true | false ]'
 
 def main(argv):
-	
 	global lcd
 	global color
 	global debug
@@ -159,7 +157,6 @@ def main(argv):
 	resetColors()
 	showLogo()
 	initTimer()
-	lcdPrint(['foobar','baz'])
 	startClock()
 	finnish()
 
