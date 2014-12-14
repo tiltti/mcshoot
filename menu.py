@@ -19,6 +19,7 @@ class Menu():
     isOn = True
     isOnCount = 0
     stepScroll = 0
+    startDelay = 9
 	
     def topElement(self, name, type, content):
         subList = list()
@@ -28,13 +29,15 @@ class Menu():
                 "Name"        : name,
                 "Sub"         : subList,
 		"Type"	      : type,
-                "Content"     : content}
+                "Content"     : content
+		}
 
     def subElement(self, name, type, content):
         return {
                 "Name"        : name,
 		"Type"        : type,
-                "Content"     : content}
+                "Content"     : content
+		}
 	
     def buttonPressed(self, lcd):
         boo = False
@@ -140,7 +143,7 @@ class Menu():
             self.element = topEl["Sub"][self.sub]
 	self.handleMenu(lcd)
 
-    def handleMenu(self,lcd):
+    def handleMenu(self, lcd):
 
 	# classes called from menu
 	shoot = ShootUtils()
