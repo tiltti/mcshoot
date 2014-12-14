@@ -6,8 +6,10 @@ from time import sleep
 import commands
 import psutil
 from datetime import datetime
+from timer import ShootUtils
 
 class Menu():
+
     menu = list()
     top = 0
     sub = 0
@@ -139,6 +141,10 @@ class Menu():
 	self.handleMenu(lcd)
 
     def handleMenu(self,lcd):
+
+	# classes called from menu
+	shoot = ShootUtils()
+
 	global element
 	global count
 	global isOn

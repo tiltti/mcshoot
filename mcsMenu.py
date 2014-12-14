@@ -7,6 +7,7 @@ from Adafruit_CharLCDPlate import Adafruit_CharLCDPlate
 from menu import Menu
 from subprocess import *
 from time import sleep, strftime
+#from timer import ShootUtils
 
 # Utility function for runnin shell commands
 def run_cmd(cmd):
@@ -20,6 +21,7 @@ def run_cmd(cmd):
 
 lcd = Adafruit_CharLCDPlate()
 menu = Menu()
+#shoot = ShootUtils()
 
 # The menu can show strings, bash and python expressions
 #
@@ -28,7 +30,7 @@ top1 = menu.topElement("< 1. Network   >", "STRING", "        v")
 top2 = menu.topElement("< 2. System    >", "STRING", "        v")
 top3 = menu.topElement("< 3. McShoot   >", "STRING", "        v")
 top4 = menu.topElement("< 4. NotUsed   >", "STRING", "         ")
-top5 = menu.topElement("< 5. NotUsed   >", "STRING", "         ")
+top5 = menu.topElement("< 5. Debug     >", "STRING", "        v")
 sub13 = menu.subElement("1 > Signal      ", "BASH", "iwconfig wlan0 | awk -F'[ =]+' '/Signal level/ {print $7}' | cut -d/ -f1")
 sub12 = menu.subElement("1 > SSID        ", "BASH", "iwconfig wlan0 | grep 'ESSID:' | awk '{print $4}' | sed 's/ESSID://g'")
 sub14 = menu.subElement("1 > Internet    ", "BASH", "ping -q -w 1 -c 1 `ip r | grep default | cut -d ' ' -f 3` > /dev/null && echo ok || echo error")
@@ -36,7 +38,9 @@ sub11 = menu.subElement("1 > IP Address  ", "BASH", "ip addr show wlan0 | grep i
 sub22 = menu.subElement("2 > CPU-Load    ", "PYTHON", 'str(str(psutil.cpu_percent()) + "%")')
 sub23 = menu.subElement("2 > CPU-Temp    ", "BASH", "vcgencmd measure_temp | cut -c 6-15")
 sub24 = menu.subElement("2 > Memory      ", "PYTHON", 'str(str(psutil.phymem_usage()[3])+"% used")')
-sub21 = menu.subElement("2 > Datetime ", "PYTHON", "datetime.now().strftime('%b %d  %H:%M:%S')")
+sub21 = menu.subElement("2 > Datetime    ", "PYTHON", "datetime.now().strftime('%b %d  %H:%M:%S')")
+sub51 = menu.subElement("5 > Python Ver. ", "BASH", "python --version")
+sub52 = menu.subElement("5 > name        ", "PYTHON", "shoot.pythonTesti()")
 
 # Add elements to the menu
 # TODO: Iterator
@@ -55,6 +59,8 @@ menu.addSubElement(top2, sub21)
 menu.addSubElement(top2, sub22)
 menu.addSubElement(top2, sub23)
 menu.addSubElement(top2, sub24)
+menu.addSubElement(top5, sub51)
+menu.addSubElement(top5, sub52)
 
 # Initialize the LCD display
 lcd.clear()

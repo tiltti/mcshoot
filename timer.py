@@ -37,6 +37,12 @@ output = 'screen'
 
 color = False
 
+class ShootUtils:
+	def pythonTesti(self):
+		print("foobar")
+		return "foobar"
+
+
 def resetColors():
 	Fore.RESET
 	Back.RESET
