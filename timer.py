@@ -94,13 +94,14 @@ def hello():
 	print 'foo'
 
 def lcdPrint(text):
-	for line in text:
-		if len(text) > 16:
+        print Fore.YELLOW + Back.BLUE + '+----------------+'
+	for index, line in enumerate(text):
+		if len(line) > 16:
 			print Fore.YELLOW + Back.RED + 'Too long string for LCD!'
-	print Fore.YELLOW + Back.BLUE + '+................+'
-	print Fore.YELLOW + Back.BLUE + '|' + text + '|'
-        print Fore.YELLOW + Back.BLUE + '|' + text + '|'
-        print Fore.YELLOW + Back.BLUE + '+................+'
+		while len(line) < 16:
+			line = line + ' '
+		print Fore.YELLOW + Back.BLUE + '|' + line + '|'
+        print Fore.YELLOW + Back.BLUE + '+----------------+'
 
 def usage():
 	print 'timer.py -o --output [ lcd | screen ] -c --color [ true | false ] -d --debug [ true | false ]'
@@ -158,7 +159,7 @@ def main(argv):
 	resetColors()
 	showLogo()
 	initTimer()
-	lcdPrint(('foobar','baz'))
+	lcdPrint(['foobar','baz'])
 	startClock()
 	finnish()
 
