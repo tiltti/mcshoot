@@ -1,5 +1,6 @@
 #!/usr/bin/python
 #
+# Mcshoot made by Ossi Tiltti (github.com/tiltti)
 # Using Menu.py made by Daniel Juenger (github.com/sleeepyjack)
 # Using Adafruit_CharLCDPlate library by Adafruit Industries (github.com/adafruit)
 
@@ -38,7 +39,7 @@ def load_config(configFile):
 	config = ConfigParser.RawConfigParser()
 	config.read(configFile)
 
-	debug = config.getboolean('McShoot', 'debug')
+	debug = config.getboolean('Debug', 'debug')
 
 	startDelay = str(config.getint('McShoot', 'startDelay'))
 	loadDelay  = str(config.getint('McShoot', 'loadDelay'))
@@ -86,8 +87,9 @@ sub11 = menu.subElement("IP Address:     ", "BASH", "ip addr show wlan0 | grep i
 sub22 = menu.subElement("CPU-Load:       ", "PYTHON", 'str(str(psutil.cpu_percent()) + "%")')
 sub23 = menu.subElement("CPU-Temp:       ", "BASH", "vcgencmd measure_temp | cut -c 6-15")
 sub24 = menu.subElement("Memory:         ", "PYTHON", 'str(str(psutil.phymem_usage()[3])+"% used")')
-sub31 = menu.subElement("Aika (s):       ", "STRING", "")
-sub32 = menu.subElement("Aika (s):       ", "STRING", "3")
+sub31 = menu.subElement("Aika sekunteina:", "STRING", "30")
+sub32 = menu.subElement("Aika sekunteina:", "STRING", "15")
+sub33 = menu.subElement("Aika sekunteina:", "STRING", "0")
 sub21 = menu.subElement("Datetime:       ", "PYTHON", "datetime.now().strftime('%b %d  %H:%M:%S')")
 sub25 = menu.subElement("Python Version: ", "BASH", "python --version")
 sub26 = menu.subElement("Foobar!         ", "PYTHON", "shoot.pythonTesti()")
@@ -112,6 +114,7 @@ menu.addSubElement(top2, sub23)
 menu.addSubElement(top2, sub24)
 menu.addSubElement(top3, sub31)
 menu.addSubElement(top3, sub32)
+menu.addSubElement(top3, sub33)
 menu.addSubElement(top2, sub25)
 menu.addSubElement(top2, sub26)
 
