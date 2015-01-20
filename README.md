@@ -1,6 +1,3 @@
-mcshoot
-=======
-
 # McShoot
 
 McShoot is a hobby project based around Raspberry Pi that allows you to do various timed scenarios for target shooting practising. The goal is to have a working prototype from which to iterate onwards.
@@ -48,6 +45,10 @@ TODO
 $ brew install ...
 $ pip install ...
 ```
+
+### Documentation
+
+[Documentation](mcshoot.md)
 
 ### Development
 
